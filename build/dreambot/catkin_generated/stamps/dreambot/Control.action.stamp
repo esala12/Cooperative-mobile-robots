@@ -1,0 +1,6 @@
+# Control.action
+bool start  # Goal - whether to start or stop the controller
+---
+bool success  # Result - whether the action completed successfully
+---
+float64 distance_to_goal  # Feedback - current distance to the goal

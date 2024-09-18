@@ -1,0 +1,7 @@
+set(dreambot_examples_SETUP_PY_SETUP_MODULE "distutils.core")
+set(dreambot_examples_SETUP_PY_VERSION "0.0.0")
+set(dreambot_examples_SETUP_PY_SCRIPTS "")
+set(dreambot_examples_SETUP_PY_PACKAGES "dreambot_examples")
+set(dreambot_examples_SETUP_PY_PACKAGE_DIRS "src/dreambot_examples")
+set(dreambot_examples_SETUP_PY_MODULES "")
+set(dreambot_examples_SETUP_PY_MODULE_DIRS "")

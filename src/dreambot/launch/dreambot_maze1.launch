@@ -1,0 +1,52 @@
+<launch>
+  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="world" default="$(find masterbot_gazebo)/world/masterbot_maze1.world"/>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+ 
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world)"/>
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include>
+ 
+  <!-- Load the URDFs into the ROS Parameter Server -->
+  <param name="robot_description1" command="$(find xacro)/xacro --inorder '$(find masterbot_description)/urdf/masterbot.urdf.xacro'" />
+  <param name="robot_description2" command="$(find xacro)/xacro --inorder '$(find zm_robot_description)/urdf/zm_robot.urdf.xacro'" />
+ 
+  <!-- Set the robot_description parameter -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find masterbot_description)/urdf/masterbot.urdf.xacro'" />
+ 
+  <!-- Run a python script to send a service call to gazebo_ros to spawn the URDF robots -->
+  <node name="urdf_spawner_masterbot" pkg="gazebo_ros" type="spawn_model" args="-urdf -model masterbot -param robot_description1
+      -x 0 -y 0 -z 1  
+      -Y 0 -P 0 -R 0"/>
+ 
+  <node name="urdf_spawner_zm_robot" pkg="gazebo_ros" type="spawn_model" args="-urdf -model zm_robot -param robot_description2
+      -x -2.0 -y 0 -z 1  
+      -Y 0 -P 0 -R 0"/> <!-- Initial offset for the zm_robot -->
+ 
+  <!-- Publish the static transform between master_odom and slave_odom -->
+  <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher" args="0.0 0 0 0 0 0 map slave_odom 100"/>
+ 
+  <!-- send fake joint values -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+ 
+  <!-- Masterbot Nodes -->
+  <node name="masterbot_pid_node" pkg="masterbot_odometry" type="masterbotpid.py" output="screen"/>
+  <node pkg="masterbot_odometry" type="kalman_filter.py" name="kalman_filter" output="screen"/>
+  <node pkg="masterbot_odometry" type="tf_kalman_node.py" name="tf_kalman_node" output="screen"/>
+ 
+  <!-- Slavebot Nodes -->
+  <node name="slavebot_pid_node" pkg="slavebot_odometry" type="slavebotpid.py" output="screen"/>
+  <node name="kalman_filter_slave_node" pkg="slavebot_odometry" type="kalmanfilter.py" output="screen"/>
+  <node pkg="slavebot_odometry" type="tf_kalman_node.py" name="tf_kalman_slave_node" output="screen"/>
+ 
+</launch>

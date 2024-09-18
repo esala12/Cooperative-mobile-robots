@@ -1,0 +1,8 @@
+prefix=/home/esala/dreambot_ws/install
+
+Name: dreambot_fuzzy
+Description: Description of dreambot_fuzzy
+Version: 1.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: roscpp std_msgs

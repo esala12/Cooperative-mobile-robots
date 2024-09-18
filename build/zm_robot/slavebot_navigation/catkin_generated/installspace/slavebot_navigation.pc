@@ -1,0 +1,8 @@
+prefix=/home/esala/dreambot_ws/install
+
+Name: slavebot_navigation
+Description: Description of slavebot_navigation
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: geometry_msgs nav_msgs actionlib_msgs move_base_msgs

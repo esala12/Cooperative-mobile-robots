@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/esala/dreambot_ws/src/gazebo_mecanum_plugins/src/gazebo_ros_mecanum_pid_drive.cpp
+gazebo_mecanum_plugins/gazebo_ros_mecanum_drive.h
+-
+

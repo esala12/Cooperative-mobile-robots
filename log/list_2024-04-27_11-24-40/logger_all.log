@@ -1,0 +1,172 @@
+[0.733s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'list', '-p', '--base-paths', '/home/esala/dreambot_ws']
+[0.733s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='list', build_base='build', ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['/home/esala/dreambot_ws'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], topological_order=False, names_only=False, paths_only=True, topological_graph=False, topological_graph_dot=False, topological_graph_density=False, topological_graph_legend=False, topological_graph_dot_cluster=False, topological_graph_dot_include_skipped=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7f09a01d04f0>, verb_extension=<colcon_package_information.verb.list.ListVerb object at 0x7f09a05cba90>, main=<bound method ListVerb.main of <colcon_package_information.verb.list.ListVerb object at 0x7f09a05cba90>>)
+[0.776s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.776s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.776s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.776s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.776s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.776s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/esala/dreambot_ws'
+[0.776s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws) by extensions ['ignore', 'ignore_ament_install']
+[0.776s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws) by extension 'ignore'
+[0.776s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws) by extension 'ignore_ament_install'
+[0.776s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws) by extensions ['colcon_pkg']
+[0.776s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws) by extension 'colcon_pkg'
+[0.776s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws) by extensions ['colcon_meta']
+[0.776s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws) by extension 'colcon_meta'
+[0.776s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws) by extensions ['ros']
+[0.776s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws) by extension 'ros'
+[0.800s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws) by extensions ['cmake', 'python']
+[0.800s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws) by extension 'cmake'
+[0.800s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws) by extension 'python'
+[0.800s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws) by extensions ['python_setup_py']
+[0.800s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws) by extension 'python_setup_py'
+[0.800s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/build) by extensions ['ignore', 'ignore_ament_install']
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/build) by extension 'ignore'
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/build) by extension 'ignore_ament_install'
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/build) by extensions ['colcon_pkg']
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/build) by extension 'colcon_pkg'
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/build) by extensions ['colcon_meta']
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/build) by extension 'colcon_meta'
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/build) by extensions ['ros']
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/build) by extension 'ros'
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/build) ignored
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/devel) by extensions ['ignore', 'ignore_ament_install']
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/devel) by extension 'ignore'
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/devel) by extension 'ignore_ament_install'
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/devel) ignored
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/gazebo_mecanum_plugins) by extensions ['ignore', 'ignore_ament_install']
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/gazebo_mecanum_plugins) by extension 'ignore'
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/gazebo_mecanum_plugins) by extension 'ignore_ament_install'
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/gazebo_mecanum_plugins) by extensions ['colcon_pkg']
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/gazebo_mecanum_plugins) by extension 'colcon_pkg'
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/gazebo_mecanum_plugins) by extensions ['colcon_meta']
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/gazebo_mecanum_plugins) by extension 'colcon_meta'
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/gazebo_mecanum_plugins) by extensions ['ros']
+[0.801s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/gazebo_mecanum_plugins) by extension 'ros'
+[0.804s] DEBUG:colcon.colcon_core.package_identification:Package '/home/esala/dreambot_ws/gazebo_mecanum_plugins' with type 'ros.catkin' and name 'gazebo_mecanum_plugins'
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/log) by extensions ['ignore', 'ignore_ament_install']
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/log) by extension 'ignore'
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/log) ignored
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src) by extensions ['ignore', 'ignore_ament_install']
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src) by extension 'ignore'
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src) by extension 'ignore_ament_install'
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src) by extensions ['colcon_pkg']
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src) by extension 'colcon_pkg'
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src) by extensions ['colcon_meta']
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src) by extension 'colcon_meta'
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src) by extensions ['ros']
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src) by extension 'ros'
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src) by extensions ['cmake', 'python']
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src) by extension 'cmake'
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src) by extension 'python'
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src) by extensions ['python_setup_py']
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src) by extension 'python_setup_py'
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot) by extensions ['ignore', 'ignore_ament_install']
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot) by extension 'ignore'
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot) by extension 'ignore_ament_install'
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot) by extensions ['colcon_pkg']
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot) by extension 'colcon_pkg'
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot) by extensions ['colcon_meta']
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot) by extension 'colcon_meta'
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot) by extensions ['ros']
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot) by extension 'ros'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot) by extensions ['cmake', 'python']
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot) by extension 'cmake'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot) by extension 'python'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot) by extensions ['python_setup_py']
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot) by extension 'python_setup_py'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/image) by extensions ['ignore', 'ignore_ament_install']
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/image) by extension 'ignore'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/image) by extension 'ignore_ament_install'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/image) by extensions ['colcon_pkg']
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/image) by extension 'colcon_pkg'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/image) by extensions ['colcon_meta']
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/image) by extension 'colcon_meta'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/image) by extensions ['ros']
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/image) by extension 'ros'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/image) by extensions ['cmake', 'python']
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/image) by extension 'cmake'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/image) by extension 'python'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/image) by extensions ['python_setup_py']
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/image) by extension 'python_setup_py'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_description) by extensions ['ignore', 'ignore_ament_install']
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_description) by extension 'ignore'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_description) by extension 'ignore_ament_install'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_description) by extensions ['colcon_pkg']
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_description) by extension 'colcon_pkg'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_description) by extensions ['colcon_meta']
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_description) by extension 'colcon_meta'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_description) by extensions ['ros']
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_description) by extension 'ros'
+[0.806s] DEBUG:colcon.colcon_core.package_identification:Package '/home/esala/dreambot_ws/src/zm_robot/zm_robot_description' with type 'ros.catkin' and name 'zm_robot_description'
+[0.806s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_gazebo) by extensions ['ignore', 'ignore_ament_install']
+[0.806s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_gazebo) by extension 'ignore'
+[0.806s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_gazebo) by extension 'ignore_ament_install'
+[0.806s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_gazebo) by extensions ['colcon_pkg']
+[0.806s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_gazebo) by extension 'colcon_pkg'
+[0.806s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_gazebo) by extensions ['colcon_meta']
+[0.806s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_gazebo) by extension 'colcon_meta'
+[0.806s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_gazebo) by extensions ['ros']
+[0.806s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_gazebo) by extension 'ros'
+[0.806s] DEBUG:colcon.colcon_core.package_identification:Package '/home/esala/dreambot_ws/src/zm_robot/zm_robot_gazebo' with type 'ros.catkin' and name 'zm_robot_gazebo'
+[0.806s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_navigation) by extensions ['ignore', 'ignore_ament_install']
+[0.806s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_navigation) by extension 'ignore'
+[0.806s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_navigation) by extension 'ignore_ament_install'
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_navigation) by extensions ['colcon_pkg']
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_navigation) by extension 'colcon_pkg'
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_navigation) by extensions ['colcon_meta']
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_navigation) by extension 'colcon_meta'
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_navigation) by extensions ['ros']
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_navigation) by extension 'ros'
+[0.807s] DEBUG:colcon.colcon_core.package_identification:Package '/home/esala/dreambot_ws/src/zm_robot/zm_robot_navigation' with type 'ros.catkin' and name 'zm_robot_navigation'
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_programing) by extensions ['ignore', 'ignore_ament_install']
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_programing) by extension 'ignore'
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_programing) by extension 'ignore_ament_install'
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_programing) by extensions ['colcon_pkg']
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_programing) by extension 'colcon_pkg'
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_programing) by extensions ['colcon_meta']
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_programing) by extension 'colcon_meta'
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_programing) by extensions ['ros']
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_programing) by extension 'ros'
+[0.808s] DEBUG:colcon.colcon_core.package_identification:Package '/home/esala/dreambot_ws/src/zm_robot/zm_robot_programing' with type 'ros.catkin' and name 'zm_robot_programing'
+[0.808s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_safety) by extensions ['ignore', 'ignore_ament_install']
+[0.808s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_safety) by extension 'ignore'
+[0.808s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_safety) by extension 'ignore_ament_install'
+[0.808s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_safety) by extensions ['colcon_pkg']
+[0.808s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_safety) by extension 'colcon_pkg'
+[0.808s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_safety) by extensions ['colcon_meta']
+[0.808s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_safety) by extension 'colcon_meta'
+[0.808s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_safety) by extensions ['ros']
+[0.808s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_safety) by extension 'ros'
+[0.809s] DEBUG:colcon.colcon_core.package_identification:Package '/home/esala/dreambot_ws/src/zm_robot/zm_robot_safety' with type 'ros.catkin' and name 'zm_robot_safety'
+[0.809s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_teleope_key) by extensions ['ignore', 'ignore_ament_install']
+[0.809s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_teleope_key) by extension 'ignore'
+[0.809s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_teleope_key) by extension 'ignore_ament_install'
+[0.809s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_teleope_key) by extensions ['colcon_pkg']
+[0.809s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_teleope_key) by extension 'colcon_pkg'
+[0.809s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_teleope_key) by extensions ['colcon_meta']
+[0.809s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_teleope_key) by extension 'colcon_meta'
+[0.809s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_teleope_key) by extensions ['ros']
+[0.809s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_teleope_key) by extension 'ros'
+[0.809s] DEBUG:colcon.colcon_core.package_identification:Package '/home/esala/dreambot_ws/src/zm_robot/zm_robot_teleope_key' with type 'ros.catkin' and name 'zm_robot_teleope_key'
+[0.810s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_twist_mux) by extensions ['ignore', 'ignore_ament_install']
+[0.810s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_twist_mux) by extension 'ignore'
+[0.810s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_twist_mux) by extension 'ignore_ament_install'
+[0.810s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_twist_mux) by extensions ['colcon_pkg']
+[0.810s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_twist_mux) by extension 'colcon_pkg'
+[0.810s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_twist_mux) by extensions ['colcon_meta']
+[0.810s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_twist_mux) by extension 'colcon_meta'
+[0.810s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_twist_mux) by extensions ['ros']
+[0.810s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_twist_mux) by extension 'ros'
+[0.810s] DEBUG:colcon.colcon_core.package_identification:Package '/home/esala/dreambot_ws/src/zm_robot/zm_robot_twist_mux' with type 'ros.catkin' and name 'zm_robot_twist_mux'
+[0.811s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_warehouse) by extensions ['ignore', 'ignore_ament_install']
+[0.811s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_warehouse) by extension 'ignore'
+[0.811s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_warehouse) by extension 'ignore_ament_install'
+[0.811s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_warehouse) by extensions ['colcon_pkg']
+[0.811s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_warehouse) by extension 'colcon_pkg'
+[0.811s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_warehouse) by extensions ['colcon_meta']
+[0.811s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_warehouse) by extension 'colcon_meta'
+[0.811s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_warehouse) by extensions ['ros']
+[0.811s] Level 1:colcon.colcon_core.package_identification:_identify(/home/esala/dreambot_ws/src/zm_robot/zm_robot_warehouse) by extension 'ros'
+[0.811s] DEBUG:colcon.colcon_core.package_identification:Package '/home/esala/dreambot_ws/src/zm_robot/zm_robot_warehouse' with type 'ros.catkin' and name 'zm_robot_warehouse'
+[0.811s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults

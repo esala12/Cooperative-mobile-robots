@@ -1,0 +1,5 @@
+<launch>
+     <!-- Node to calculate and set parameters -->
+     <node name="arg_calculator" pkg="dreambot" type="calculate_args.py" output="screen" required="true"/>
+ </launch>
+ 

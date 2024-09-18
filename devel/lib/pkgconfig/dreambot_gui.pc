@@ -1,0 +1,8 @@
+prefix=/home/esala/dreambot_ws/devel
+
+Name: dreambot_gui
+Description: Description of dreambot_gui
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

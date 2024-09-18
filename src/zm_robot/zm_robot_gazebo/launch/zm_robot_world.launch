@@ -1,0 +1,43 @@
+<launch>
+  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find zm_robot_gazebo)/worlds/zm_robot_empty.world"/>
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include>
+
+  <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description"
+    command="$(find xacro)/xacro --inorder '$(find zm_robot_description)/urdf/zm_robot.urdf.xacro'" />
+
+  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-urdf -model zm_robot -param robot_description"/>
+
+  <!-- send fake joint values -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+
+  <node name="slavebot_pid_node" pkg="slavebot_odometry" type="slavebotpid.py" output="screen"/>
+  <node name="kalman_filter_slave_node" pkg="slavebot_odometry" type="kalmanfilter.py" output="screen"/>
+  <node pkg="slavebot_odometry" type="tf_kalman_node.py" name="tf_kalman_slave_node" output="screen"/>
+
+  <node pkg="slavebot_fuzzy" type="fuzzy_continous.py" name="fuzzy_matlab_slave_node" output="screen"/>
+  <node pkg="slavebot_fuzzy" type="path_generate.py" name="path_slave_publisher" output="screen"/>
+
+  <node 
+    pkg="rviz" 
+    type="rviz" 
+    name="rviz" 
+    args="-d $(find slavebot_fuzzy)/rviz/path.rviz"  
+    required="true"/> 
+
+</launch>

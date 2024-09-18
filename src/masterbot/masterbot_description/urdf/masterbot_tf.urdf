@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<robot name="masterbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+   
+
+     <link name="master_base_footprint"/>
+
+     <joint name="master_base_joint" type="fixed">
+          <parent link="master_base_footprint"/>
+          <child link="master_base_link"/>
+          <origin xyz="0 0 0.081572" rpy="0 0 0"/>
+     </joint>
+
+     <!-- Base Link -->
+     <link name="master_base_link"/>
+
+     <!-- sick LiDAR 0 -->
+  <joint name="sick_lidar0_joint" type="fixed">
+     <parent link="master_base_link"/>
+     <child link="sick_lidar0"/>
+     <origin xyz="0.33 0.0 0.195722" rpy="0 0 0"/>
+   </joint>
+ 
+   <link name="sick_lidar0"/>
+
+   <!-- IMU -->
+  <joint name="IMU_joint " type="fixed">
+     <parent link="master_base_link"/>
+     <child link="IMU_sensor"/>
+     <origin xyz="0 0 0.08" rpy="0 0 0"/>
+     <axis xyz="0 0 1"/>
+   </joint>
+ 
+   <link name="IMU_sensor">
+   </link>
+
+  
+   
+     
+          
+     
+</robot>

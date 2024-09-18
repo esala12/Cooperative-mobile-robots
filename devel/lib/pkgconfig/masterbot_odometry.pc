@@ -1,0 +1,8 @@
+prefix=/home/esala/dreambot_ws/devel
+
+Name: masterbot_odometry
+Description: Description of masterbot_odometry
+Version: 0.0.0
+Cflags: -I/home/esala/dreambot_ws/src/masterbot/masterbot_odometry/include
+Libs: -L${prefix}/lib 
+Requires: tf2_ros geometry_msgs sensor_msgs nav_msgs

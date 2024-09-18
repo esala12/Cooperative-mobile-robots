@@ -1,0 +1,121 @@
+<launch>
+    <!-- these are the arguments you can pass to this launch file, for example paused:=true -->
+    <arg name="world" default="$(find masterbot_gazebo)/world/masterbot_maze1.world"/>
+    <arg name="paused" default="false"/>
+    <arg name="use_sim_time" default="true"/>
+    <arg name="gui" default="true"/>
+    <arg name="headless" default="false"/>
+    <arg name="debug" default="false"/>
+    <arg name="distance_master" default="3.0"/>
+    <arg name="map_file" default="$(find slam)/map/maze1.yaml"/> 
+    <arg name="move_forward_only" default="false"/> 
+
+    <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
+
+    <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(arg world)"/>
+        <arg name="debug" value="$(arg debug)"/>
+        <arg name="gui" value="$(arg gui)"/>
+        <arg name="paused" value="$(arg paused)"/>
+        <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+        <arg name="headless" value="$(arg headless)"/>
+    </include>
+
+    <!-- Load the URDFs into the ROS Parameter Server -->
+    <param name="robot_description1" command="$(find xacro)/xacro --inorder '$(find masterbot_description)/urdf/masterbot.urdf.xacro'"/>
+    <param name="robot_description2" command="$(find xacro)/xacro --inorder '$(find zm_robot_description)/urdf/zm_robot.urdf.xacro'"/>
+
+    <!-- Set the robot_description parameter -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find masterbot_description)/urdf/masterbot.urdf.xacro'"/>
+
+    <!-- Run a python script to send a service call to gazebo_ros to spawn the URDF robots -->
+    <node name="urdf_spawner_masterbot" pkg="gazebo_ros" type="spawn_model" args="-urdf -model masterbot -param robot_description1
+        -x 0 -y 5.5 -z 1  
+        -Y 0 -P 0 -R 0"/>
+
+    <node name="urdf_spawner_zm_robot" pkg="gazebo_ros" type="spawn_model" args="-urdf -model zm_robot -param robot_description2
+        -x -9 -y 0 -z 1  
+        -Y 0 -P 0 -R 0"/> <!-- Adjust the position and orientation of the zm_robot as needed -->
+
+    <!-- send fake joint values -->
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+
+    <!-- Masterbot Nodes -->
+    <node name="masterbot_pid_node" pkg="masterbot_odometry" type="masterbotpid.py" output="screen"/>
+    <node pkg="masterbot_odometry" type="kalman_filter.py" name="kalman_filter" output="screen"/>
+    <node pkg="masterbot_odometry" type="tf_kalman_node.py" name="tf_kalman_node" output="screen"/>
+    
+
+    <!-- Slavebot Nodes -->
+    <node name="slavebot_pid_node" pkg="slavebot_odometry" type="slavebotpid.py" output="screen"/>
+    <node name="kalman_filter_slave_node" pkg="slavebot_odometry" type="kalmanfilter.py" output="screen"/>
+    <node pkg="slavebot_odometry" type="tf_kalman_node.py" name="tf_kalman_slave_node" output="screen"/>
+
+    <!-- Fuzzy -->
+    <!-- <node name="combined_fuzzy_dreambot_node" pkg="dreambot" type="fuzzy_wavepoints.py" output="screen">
+        <param name="distance_master" value="$(arg distance_master)"/>
+    </node> -->
+
+    <!-- <node name="parameter_publisher" pkg="dreambot" type="parameter_publisher.py" output="screen">
+   </node> -->
+
+    <!-- <node name="leader_switch_node" pkg="dreambot" type="leader_switch.py" output="screen">
+       <param name="distance_master" value="$(arg distance_master)"/>
+   </node> -->
+
+   
+
+   <!-- <node name="path_generator_node" pkg="dreambot" type="create_path.py" output="screen">
+   </node>
+
+   <node name="leader_switch_node" pkg="dreambot" type="fuzzy_leader.py" output="screen">
+       <param name="distance_master" value="$(arg distance_master)"/>
+   </node> -->
+
+   
+
+
+    <node name="path_publisher" pkg="dreambot" type="path_generator.py" output="screen"/>
+
+    <node
+        pkg="rviz"
+        type="rviz"
+        name="rviz"
+        args="-d $(find dreambot)/rviz/world.rviz"
+        required="true"/>
+
+    <!-- AMCL Master -->
+   <include file="$(find dreambot)/launch/master_amcl.launch"/>
+
+   <!-- AMCL Slave-->
+   <include file="$(find dreambot)/launch/slave_amcl.launch"/>
+
+    <node pkg="astar" type="astar" name="astar" output="screen">
+         <param name="Euclidean" value="true"/>
+         <param name="OccupyThresh" value="-1"/>
+         <param name="InflateRadius" value="0.2"/>
+         <param name="rate" value="10"/>
+     </node>
+
+     <node pkg="dreambot" type="odom_filter.py" name="tf_listener_node" output="screen"/>
+
+     <include file="$(find masterbot_navigation)/launch/move_base.launch">    
+        <arg name="move_forward_only" value="$(arg move_forward_only)"/>
+      </include>
+
+      <include file="$(find slavebot_navigation)/launch/move_base.launch">    
+        <arg name="move_forward_only" value="$(arg move_forward_only)"/>
+      </include> 
+
+      <node pkg="masterbot_navigation" type="navigate_goal.py" name="masterbot_navigation" output="screen"/>
+
+      <node pkg="slavebot_navigation" type="navigate_goal.py" name="slavebot_navigation" output="screen"/>
+
+      <node pkg="dreambot" type="multi_path.py" name="multi_path_subscriber_node" output="screen"/>
+      <node pkg="dreambot_tkinter" type="tkinter_gui_test1.py" name="tkinter_gui_test1" output="screen"/>
+
+      <node pkg="dreambot" type="leader_switch_combine.py" name="leader_switch_combine" output="screen"/>
+      
+
+</launch>

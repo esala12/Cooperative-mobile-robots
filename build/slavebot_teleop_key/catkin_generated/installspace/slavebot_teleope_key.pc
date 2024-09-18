@@ -1,0 +1,8 @@
+prefix=/home/esala/dreambot_ws/install
+
+Name: slavebot_teleope_key
+Description: Description of slavebot_teleope_key
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,13 @@
+<launch>
+  
+  
+  <include file="$(find masterbot_navigation)/launch/navigation.launch"/>
+
+  <include file="$(find slavebot_navigation)/launch/navigation.launch"/>
+  
+  <node pkg="masterbot_navigation" type="navigate_goal.py" name="masterbot_navigation" output="screen"/>
+
+  <node pkg="slavebot_navigation" type="navigate_goal.py" name="slavebot_navigation" output="screen"/>
+     
+</launch>
+   

@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+
+<launch>
+  <!-- Arguments -->  
+  <arg name="cmd_vel_topic" default="/slave_cmd_vel" />
+  <arg name="odom_topic" default="slave_odom" />
+  <arg name="move_forward_only" default="true"/>
+
+  <!-- move_base -->
+  <node pkg="move_base" type="move_base" respawn="false" name="slave_move_base" output="screen">
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+    <rosparam file="$(find slavebot_navigation)/param/common_costmap.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find slavebot_navigation)/param/common_costmap.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find slavebot_navigation)/param/local_costmap.yaml" command="load" />
+    <rosparam file="$(find slavebot_navigation)/param/global_costmap.yaml" command="load" />
+    <rosparam file="$(find slavebot_navigation)/param/move_base.yaml" command="load" />
+    <rosparam file="$(find slavebot_navigation)/param/dwa_planner.yaml" command="load" />
+    <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+    <remap from="odom" to="$(arg odom_topic)"/>
+    <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
+
+    <remap from="/move_base/cancel" to="/slave_move_base/cancel" />
+    <remap from="/move_base/feedback" to="/slave_move_base/feedback" />
+    <remap from="/move_base/goal" to="/slave_move_base/goal" />
+    <remap from="/move_base/recovery_status" to="/slave_move_base/recovery_status" />
+    <remap from="/move_base/result" to="/slave_move_base/result" />
+    <remap from="/move_base/status" to="/slave_move_base/status" />
+    <remap from="/move_base_simple/goal" to="/slave_move_base_simple/goal" />
+  </node>
+</launch>

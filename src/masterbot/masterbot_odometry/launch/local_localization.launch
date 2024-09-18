@@ -1,0 +1,10 @@
+<launch>
+
+    <node pkg="masterbot_odometry" type="kalman_filter.py" name="kalman_filter" output="screen"/>
+
+    <node pkg="masterbot_odometry" type="tf_kalman_node.py" name="tf_kalman_node" output="screen"/>
+
+    <node pkg="rviz" type="rviz" name="rviz"/>
+      
+</launch>
+    

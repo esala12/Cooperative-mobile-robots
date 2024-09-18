@@ -1,0 +1,8 @@
+prefix=/home/esala/dreambot_ws/install
+
+Name: masterbot_controller
+Description: Description of masterbot_controller
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

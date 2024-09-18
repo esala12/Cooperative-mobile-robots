@@ -1,0 +1,8 @@
+prefix=/home/esala/dreambot_ws/devel
+
+Name: global_path_palanning
+Description: Description of global_path_palanning
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
