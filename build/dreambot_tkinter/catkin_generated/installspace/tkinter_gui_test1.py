@@ -21,7 +21,8 @@ class CustomTkinterApp:
         # Create the main application window
         self.root = customtkinter.CTk()
         self.root.title('Tkinter.com - Custom Tkinter!')
-        self.root.attributes('-fullscreen', True)
+        # Removed the fullscreen attribute
+        # self.root.attributes('-fullscreen', True)
 
         # Adjust frame layout to fill the screen
         self.top_frame = customtkinter.CTkFrame(self.root)
@@ -83,17 +84,24 @@ class CustomTkinterApp:
         button_names = ["A", "B", "C", "D", "E", "F"]
         for i, name in enumerate(button_names):
             if name == "A":
-                # Bind press and release for button A
-                button = customtkinter.CTkButton(self.buttons_frame, text=name, 
-                                                 height=80, width=120, 
-                                                 font=('Helvetica', 20))
-                button.bind('<ButtonPress-1>', self.button_a_pressed)
-                button.bind('<ButtonRelease-1>', self.button_a_released)
+                # Bind press and release for button A and disable it permanently
+                button = customtkinter.CTkButton(
+                    self.buttons_frame, 
+                    text=name, 
+                    height=80, 
+                    width=120, 
+                    font=('Helvetica', 20),
+                    state='disabled'  # Disable Button A permanently
+                )
             else:
                 # Bind press and release for buttons B-F
-                button = customtkinter.CTkButton(self.buttons_frame, text=name, 
-                                                 height=80, width=120, 
-                                                 font=('Helvetica', 20))
+                button = customtkinter.CTkButton(
+                    self.buttons_frame, 
+                    text=name, 
+                    height=80, 
+                    width=120, 
+                    font=('Helvetica', 20)
+                )
                 button.bind('<ButtonPress-1>', lambda event, n=name: self.multi_path_pressed(event, n))
                 button.bind('<ButtonRelease-1>', lambda event, n=name: self.multi_path_released(event, n))
             button.grid(row=i//3, column=i%3, padx=20, pady=20, sticky='nsew')

@@ -163,3 +163,11 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/dreambot" TYPE PROGRAM FILES "/home/esala/dreambot_ws/build/dreambot/catkin_generated/installspace/leader_switch_combine.py")
 endif()
 
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/dreambot" TYPE PROGRAM FILES "/home/esala/dreambot_ws/build/dreambot/catkin_generated/installspace/calculate_rpm.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/dreambot" TYPE PROGRAM FILES "/home/esala/dreambot_ws/build/dreambot/catkin_generated/installspace/velocity_to_odometry.py")
+endif()
+
