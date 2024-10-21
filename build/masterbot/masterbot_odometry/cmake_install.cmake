@@ -88,3 +88,11 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/masterbot_odometry" TYPE PROGRAM FILES "/home/esala/dreambot_ws/build/masterbot/masterbot_odometry/catkin_generated/installspace/tf_kalman_node.py")
 endif()
 
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/masterbot_odometry" TYPE PROGRAM FILES "/home/esala/dreambot_ws/build/masterbot/masterbot_odometry/catkin_generated/installspace/master_tf_cal.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/masterbot_odometry" TYPE PROGRAM FILES "/home/esala/dreambot_ws/build/masterbot/masterbot_odometry/catkin_generated/installspace/kalman_filter_real.py")
+endif()
+

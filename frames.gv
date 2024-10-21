@@ -1,16 +1,10 @@
 digraph G {
-"map" -> "master_odom"[label="Broadcaster: /master_amcl\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 54.031 sec old)\nBuffer length: 0.000 sec\n"];
-"master_base_footprint_ekf" -> "master_lidar"[label="Broadcaster: /tf_kalman_node\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 54.031 sec old)\nBuffer length: 0.000 sec\n"];
-"master_odom" -> "master_base_footprint_ekf"[label="Broadcaster: /tf_kalman_node\nAverage rate: 22.409 Hz\nMost recent transform: 53.995 ( 0.036 sec old)\nBuffer length: 0.357 sec\n"];
-"master_base_footprint_ekf" -> "IMU_sensor"[label="Broadcaster: /tf_kalman_node\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 54.031 sec old)\nBuffer length: 0.000 sec\n"];
-"map" -> "slave_odom"[label="Broadcaster: /slave_amcl\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 54.031 sec old)\nBuffer length: 0.000 sec\n"];
-"slave_base_footprint_ekf" -> "slave_lidar"[label="Broadcaster: /tf_kalman_slave_node\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 54.031 sec old)\nBuffer length: 0.000 sec\n"];
-"slave_odom" -> "slave_base_footprint_ekf"[label="Broadcaster: /tf_kalman_slave_node\nAverage rate: 22.409 Hz\nMost recent transform: 54.014 ( 0.017 sec old)\nBuffer length: 0.357 sec\n"];
-"slave_base_footprint_ekf" -> "IMU_sensor_slave"[label="Broadcaster: /tf_kalman_slave_node\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 54.031 sec old)\nBuffer length: 0.000 sec\n"];
-"master_odom" -> "master_base_footprint"[label="Broadcaster: /gazebo\nAverage rate: 22.346 Hz\nMost recent transform: 53.995 ( 0.036 sec old)\nBuffer length: 0.358 sec\n"];
-"slave_odom" -> "slave_base_footprint"[label="Broadcaster: /gazebo\nAverage rate: 22.409 Hz\nMost recent transform: 54.014 ( 0.017 sec old)\nBuffer length: 0.357 sec\n"];
+"map" -> "master_odom"[label="Broadcaster: /tf_kalman_node\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1728017470.364 sec old)\nBuffer length: 0.000 sec\n"];
+"master_base_footprint_ekf" -> "master_lidar"[label="Broadcaster: /tf_kalman_node\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1728017470.364 sec old)\nBuffer length: 0.000 sec\n"];
+"master_odom" -> "master_base_footprint_ekf"[label="Broadcaster: /tf_kalman_node\nAverage rate: 16.845 Hz\nMost recent transform: 1728017470.295 ( 0.069 sec old)\nBuffer length: 4.927 sec\n"];
+"master_base_footprint_ekf" -> "IMU_sensor"[label="Broadcaster: /tf_kalman_node\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1728017470.364 sec old)\nBuffer length: 0.000 sec\n"];
 edge [style=invis];
  subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
-"Recorded at time: 54.031"[ shape=plaintext ] ;
+"Recorded at time: 1728017470.364"[ shape=plaintext ] ;
  }->"map";
 }

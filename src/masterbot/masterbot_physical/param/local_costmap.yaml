@@ -1,0 +1,14 @@
+local_costmap:
+  global_frame: master_odom
+  robot_base_frame: master_base_footprint_ekf
+
+  update_frequency: 10.0
+  publish_frequency: 10.0
+  transform_tolerance: 0.5  
+
+  static_map: false  
+  rolling_window: true
+  width: 3
+  height: 3 
+  resolution: 0.05
+

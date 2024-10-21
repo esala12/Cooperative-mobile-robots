@@ -268,7 +268,7 @@ if __name__ == '__main__':
 
         if not args.local:
             # environment at generation time
-            CMAKE_PREFIX_PATH = r'/home/esala/dreambot_ws/devel;/opt/ros/noetic;/home/esala/hospital_bot/install/hospital_bot_navigation;/home/esala/hospital_bot/install/hospital_bot_mapping;/home/esala/hospital_bot/install/hospital_bot_localization;/home/esala/hospital_bot/install/hospital_bot_description;/home/esala/hospital_bot/install/hospital_bot_controller;/home/esala/bumperbot_ws/install/bumperbot_description;/home/esala/bumperbot_ws/install/bumperbot_cpp_examples;/home/esala/bumperbot_ws/install/bumperbot_controller'.split(';')
+            CMAKE_PREFIX_PATH = r'/home/esala/hospital_bot/install/hospital_bot_navigation;/home/esala/hospital_bot/install/hospital_bot_mapping;/home/esala/hospital_bot/install/hospital_bot_localization;/home/esala/hospital_bot/install/hospital_bot_description;/home/esala/hospital_bot/install/hospital_bot_controller;/home/esala/bumperbot_ws/install/bumperbot_description;/home/esala/bumperbot_ws/install/bumperbot_cpp_examples;/home/esala/bumperbot_ws/install/bumperbot_controller;/opt/ros/noetic'.split(';')
         else:
             # don't consider any other prefix path than this one
             CMAKE_PREFIX_PATH = []

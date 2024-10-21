@@ -90,6 +90,6 @@ class KalmanFilter(object):
           self.linear_velocity_y_ += odom_linear_y
 
 if __name__ == '__main__':
-     rospy.init_node('kalman_filter_node')
+     rospy.init_node('kalman_filter_node_real')
      filter = KalmanFilter()
      rospy.spin()

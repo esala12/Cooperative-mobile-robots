@@ -78,6 +78,7 @@ all: masterbot/masterbot_gazebo/all
 all: rplidar_ros/all
 all: dreambot_examples/all
 all: masterbot/masterbot_odometry/all
+all: masterbot/masterbot_physical/all
 all: zm_robot/slavebot_odometry/all
 all: Astar/all
 all: dreambot/all
@@ -125,6 +126,7 @@ preinstall: masterbot/masterbot_gazebo/preinstall
 preinstall: rplidar_ros/preinstall
 preinstall: dreambot_examples/preinstall
 preinstall: masterbot/masterbot_odometry/preinstall
+preinstall: masterbot/masterbot_physical/preinstall
 preinstall: zm_robot/slavebot_odometry/preinstall
 preinstall: Astar/preinstall
 preinstall: dreambot/preinstall
@@ -177,6 +179,7 @@ clean: masterbot/masterbot_gazebo/clean
 clean: rplidar_ros/clean
 clean: dreambot_examples/clean
 clean: masterbot/masterbot_odometry/clean
+clean: masterbot/masterbot_physical/clean
 clean: zm_robot/slavebot_odometry/clean
 clean: Astar/clean
 clean: dreambot/clean
@@ -886,6 +889,24 @@ masterbot/masterbot_odometry/preinstall:
 masterbot/masterbot_odometry/clean:
 
 .PHONY : masterbot/masterbot_odometry/clean
+
+#=============================================================================
+# Directory level rules for directory masterbot/masterbot_physical
+
+# Recursive "all" directory target.
+masterbot/masterbot_physical/all:
+
+.PHONY : masterbot/masterbot_physical/all
+
+# Recursive "preinstall" directory target.
+masterbot/masterbot_physical/preinstall:
+
+.PHONY : masterbot/masterbot_physical/preinstall
+
+# Recursive "clean" directory target.
+masterbot/masterbot_physical/clean:
+
+.PHONY : masterbot/masterbot_physical/clean
 
 #=============================================================================
 # Directory level rules for directory masterbot_teleop_key

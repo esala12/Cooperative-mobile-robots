@@ -30,5 +30,7 @@ catkin_install_python(PROGRAMS
   src/tf_republisher_node.py
   src/kalman_filter.py
   src/tf_kalman_node.py
+  src/master_tf_cal.py
+  src/kalman_filter_real.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

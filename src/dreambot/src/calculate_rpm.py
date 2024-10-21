@@ -5,8 +5,8 @@ from geometry_msgs.msg import Twist
 from std_msgs.msg import Float32MultiArray
 
 # Define robot-specific constants
-lx = 0.37  # Distance from the center of the robot to the wheels in x direction (meters)
-ly = 0.38  # Distance from the center of the robot to the wheels in y direction (meters)
+lx = 0.39  # Distance from the center of the robot to the wheels in x direction (meters) 0.37(original)
+ly = 0.36  # Distance from the center of the robot to the wheels in y direction (meters) 0.38
 r = 0.04   # Wheel radius (meters)
 
 # Publisher for the wheel RPMs

@@ -1,0 +1,9 @@
+<launch>
+
+     <node pkg="dreambot" type="velocity_to_odometry.py" name="odometry_publisher" output="screen"/>
+ 
+     <node pkg="dreambot" type="calculate_rpm.py" name="master_cmd_vel_listener" output="screen"/>
+ 
+     <node pkg="rviz" type="rviz" name="rviz"/>
+       
+ </launch>
