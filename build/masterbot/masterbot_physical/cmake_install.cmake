@@ -56,3 +56,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/masterbot_physical" TYPE PROGRAM FILES "/home/esala/dreambot_ws/build/masterbot/masterbot_physical/catkin_generated/installspace/goal_pose.py")
 endif()
 
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/masterbot_physical" TYPE PROGRAM FILES "/home/esala/dreambot_ws/build/masterbot/masterbot_physical/catkin_generated/installspace/master_lidar_filter.py")
+endif()
+

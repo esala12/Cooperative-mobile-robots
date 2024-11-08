@@ -19,7 +19,9 @@ class MoveBaseClient:
         # Publisher for master_docking_station topic
         self.docking_pub = rospy.Publisher('/master_docking_station', Bool, queue_size=10)
 
-        self.initial_coordinate = [-8.8, 5.5]
+        # self.initial_coordinate = [-0.35, 0.3]
+        # self.initial_coordinate = [-8.8, 5.5]
+        self.initial_coordinate = [-0.3, 0.3]
 
         # Internal state to track if the robot should move
         self.active = False
@@ -43,7 +45,7 @@ class MoveBaseClient:
 
     def move_to_goal(self, nextGoal):
         # Cancel any existing goals before sending a new one
-        self.docking_pub.publish(False)
+        # self.docking_pub.publish(False)
         self.ac.cancel_all_goals()
 
         goal = MoveBaseGoal()
@@ -62,10 +64,10 @@ class MoveBaseClient:
             rospy.loginfo("You have reached the destination")
             self.docking_pub.publish(True)  # Publish True when the goal is reached
             return True
-        else:
-            rospy.loginfo("The robot failed to reach the destination")
-            self.docking_pub.publish(False)  # Publish False when the goal is not reached
-            return False
+        # else:
+        #     rospy.loginfo("The robot failed to reach the destination")
+        #     self.docking_pub.publish(False)  # Publish False when the goal is not reached
+        #     return False
 
     def next_goal(self, next):
         return [self.master_pos, self.initial_coordinate[1], 0.004372066393586199, 0.9999904424720518]

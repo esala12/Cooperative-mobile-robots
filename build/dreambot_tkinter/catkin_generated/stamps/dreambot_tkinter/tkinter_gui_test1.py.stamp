@@ -41,7 +41,7 @@ class CustomTkinterApp:
         self.top_frame.grid_columnconfigure(1, weight=1)
 
         # Display the image using CTkImage in the image_frame
-        self.image = Image.open("/home/esala/dreambot_ws/src/dreambot_tkinter/images/map.jpg")
+        self.image = Image.open("/home/esala/dreambot_ws/src/dreambot_tkinter/images/six1_modified2.jpg")
         self.image = self.image.resize((600, 300), Image.Resampling.LANCZOS)
         self.ctk_image = customtkinter.CTkImage(light_image=self.image, dark_image=self.image, size=(600, 300))
         self.image_label = customtkinter.CTkLabel(self.image_frame, image=self.ctk_image, text="")

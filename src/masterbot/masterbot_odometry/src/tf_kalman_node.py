@@ -8,7 +8,7 @@ class TfMasterbot(object):
 
     def __init__(self):
         # Subscriber for the odometry topic
-        self.odom_sub_ = rospy.Subscriber("/master_odom_cal", Odometry, self.imuCallback)
+        self.odom_sub_ = rospy.Subscriber("/masterbot_kalman", Odometry, self.imuCallback)
         
         # Static transform broadcaster
         self.static_broadcaster = StaticTransformBroadcaster()

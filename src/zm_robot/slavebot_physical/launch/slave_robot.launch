@@ -1,0 +1,9 @@
+<launch>
+
+     <node name="slave_cmd_vel_listener" pkg="slavebot_physical" type="calculate_rpm_slave.py" output="screen"/>
+
+     <node name="odometry_publisher_slave" pkg="slavebot_physical" type="velocity_to_odometry_slave.py" output="screen"/>
+     
+     <node name="tf_kalman_node_slave" pkg="slavebot_physical" type="tf_kalman_node_slave.py" output="screen"/>
+
+</launch>

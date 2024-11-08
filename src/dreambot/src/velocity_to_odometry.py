@@ -7,16 +7,17 @@ from geometry_msgs.msg import Quaternion, Pose, Twist, Point, Vector3
 import tf
 import math
 
+
 class OdometryPublisher:
     def __init__(self):
         # Initialize the node
         rospy.init_node('odometry_publisher', anonymous=True)
         
         # Subscribe to the velocity topic
-        self.vel_sub = rospy.Subscriber('/current_robot_velocity', Float32MultiArray, self.velocity_callback)
+        self.vel_sub = rospy.Subscriber('/current_robot_velocity_master', Float32MultiArray, self.velocity_callback)
         
         # Publisher for odometry
-        self.odom_pub = rospy.Publisher('/master_odom_cal', Odometry, queue_size=10)
+        self.odom_pub = rospy.Publisher('/masterbot_kalman', Odometry, queue_size=10)
         
         
         # Parameters for robot state

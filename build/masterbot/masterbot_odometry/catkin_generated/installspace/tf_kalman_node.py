@@ -32,7 +32,7 @@ class TfMasterbot(object):
         self.static_transform_lidar = TransformStamped()
         self.static_transform_lidar.header.frame_id = "master_base_footprint_ekf"
         self.static_transform_lidar.child_frame_id = "master_lidar"
-        self.static_transform_lidar.transform.translation.x = 0.33
+        self.static_transform_lidar.transform.translation.x = 0.0
         self.static_transform_lidar.transform.translation.y = 0.0
         self.static_transform_lidar.transform.translation.z = 0.195722
         self.static_transform_lidar.transform.rotation.x = 0

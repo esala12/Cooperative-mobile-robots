@@ -62,19 +62,13 @@ Visualization Manager:
         All Enabled: false
         IMU_sensor:
           Value: false
-        IMU_sensor_slave:
-          Value: false
         map:
           Value: true
-        master_base_footprint:
-          Value: false
         master_base_footprint_ekf:
           Value: true
         master_lidar:
           Value: false
         master_odom:
-          Value: false
-        slave_base_footprint:
           Value: false
         slave_base_footprint_ekf:
           Value: true
@@ -91,18 +85,12 @@ Visualization Manager:
       Tree:
         map:
           master_odom:
-            master_base_footprint:
-              {}
             master_base_footprint_ekf:
-              IMU_sensor:
-                {}
               master_lidar:
                 {}
           slave_odom:
-            slave_base_footprint:
-              {}
             slave_base_footprint_ekf:
-              IMU_sensor_slave:
+              IMU_sensor:
                 {}
               slave_lidar:
                 {}
@@ -249,7 +237,7 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.05000000074505806
       Style: Flat Squares
-      Topic: /master_scan
+      Topic: /lidar_master/scan
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
@@ -277,7 +265,7 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.05000000074505806
       Style: Flat Squares
-      Topic: /slave_scan
+      Topic: /lidar_slave/scan
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
@@ -436,7 +424,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 19.439970016479492
+      Distance: 12.783053398132324
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -444,9 +432,9 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -4.953054428100586
-        Y: 4.06459903717041
-        Z: -1.7387652397155762
+        X: 3.1383180618286133
+        Y: -1.2852028608322144
+        Z: -1.744084119796753
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false

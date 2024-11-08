@@ -5,12 +5,17 @@ from geometry_msgs.msg import Twist
 from std_msgs.msg import Float32MultiArray
 
 # Define robot-specific constants
-lx = 0.37  # Distance from the center of the robot to the wheels in x direction (meters)
-ly = 0.38  # Distance from the center of the robot to the wheels in y direction (meters)
+lx = 0.37  # Distance from the center of the robot to the wheels in x direction (meters) 0.39(original)
+ly = 0.38  # Distance from the center of the robot to the wheels in y direction (meters) 0.36
 r = 0.04   # Wheel radius (meters)
+MAX_RPM = 50  # Maximum allowed RPM
 
 # Publisher for the wheel RPMs
 rpm_pub = None
+
+def clamp_rpm(rpm):
+    """Clamp the RPM value to be within the allowed maximum."""
+    return max(min(rpm, MAX_RPM), -MAX_RPM)  # Clamp both positive and negative RPM
 
 def cmd_vel_callback(msg):
     # Extract velocities from the Twist message
@@ -33,6 +38,12 @@ def cmd_vel_callback(msg):
     rpm_rl = w_rl * (60 / (2 * 3.1416))
     rpm_rr = w_rr * (60 / (2 * 3.1416))
 
+    # Clamp the RPM values to the maximum allowed RPM
+    rpm_fl = clamp_rpm(rpm_fl)
+    rpm_fr = clamp_rpm(rpm_fr)
+    rpm_rl = clamp_rpm(rpm_rl)
+    rpm_rr = clamp_rpm(rpm_rr)
+
     # Log the RPMs for debugging
     rospy.loginfo(f"Motor RPMs -> Front Left: {rpm_fl}, Front Right: {rpm_fr}, Rear Left: {rpm_rl}, Rear Right: {rpm_rr}")
 
@@ -50,7 +61,7 @@ def listener():
     rospy.Subscriber("/master_cmd_vel", Twist, cmd_vel_callback)
     
     # Initialize the RPM publisher
-    rpm_pub = rospy.Publisher('/wheel_velocities', Float32MultiArray, queue_size=10)
+    rpm_pub = rospy.Publisher('/wheel_velocities_master', Float32MultiArray, queue_size=10)
 
     # Keep the node running
     rospy.spin()

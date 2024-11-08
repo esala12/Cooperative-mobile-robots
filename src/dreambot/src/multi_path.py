@@ -32,6 +32,7 @@ class MultiPathSubscriberNode:
         # Publisher for the /path topic
         self.path_pub = rospy.Publisher('/path', Path, queue_size=10)
 
+
         # Coordinates
         self.initial_coordinate = [-8.8, 5.5]
         self.b_coordinate = [0, 5.5]

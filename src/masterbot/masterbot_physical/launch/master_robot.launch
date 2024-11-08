@@ -1,0 +1,9 @@
+<launch>
+
+     <node name="master_cmd_vel_listener" pkg="dreambot" type="calculate_rpm.py" output="screen"/>
+
+     <node name="odometry_publisher" pkg="dreambot" type="velocity_to_odometry.py" output="screen"/>
+     
+     <node name="tf_kalman_node" pkg="masterbot_odometry" type="tf_kalman_node.py" output="screen"/>
+
+</launch>

@@ -1,5 +1,5 @@
 <launch>
-     <arg name="scan_topic" default="master_scan" />
+     <arg name="scan_topic" default="/lidar_master/scan" />
    
      <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
        <param name="base_frame" value="master_lidar"/>

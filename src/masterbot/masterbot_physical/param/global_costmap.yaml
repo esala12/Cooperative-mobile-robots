@@ -8,3 +8,19 @@ global_costmap:
   transform_tolerance: 0.5
 
   static_map: true
+
+  obstacle_layer:
+    observation_sources: lidar_scan
+    lidar_scan:
+      topic: /lidar_master/scan
+      sensor_frame: master_lidar    # Update this to your LIDAR frame
+      data_type: LaserScan
+      marking: true
+      clearing: true
+      obstacle_range: 3.0
+      raytrace_range: 3.5
+
+  inflation_layer:
+    inflation_radius: 2.0
+    cost_scaling_factor: 3.0
+      

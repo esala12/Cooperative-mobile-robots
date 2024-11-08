@@ -65,5 +65,6 @@ catkin_install_python(PROGRAMS
   src/leader_switch_combine.py
   src/calculate_rpm.py
   src/velocity_to_odometry.py
+  src/multi_path_six1.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

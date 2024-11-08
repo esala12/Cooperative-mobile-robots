@@ -3,19 +3,19 @@
 <launch>
   <!-- Arguments -->
  
-  <arg name="map_file" default="$(find slam)/map/my_map.yaml"/>  
+  <arg name="map_file" default="$(find slam)/map/four_2.yaml"/>  
   <arg name="move_forward_only" default="false"/>
 
   <!-- Map server -->
   <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
 
   <!-- AMCL -->
-  <include file="$(find masterbot_navigation)/launch/amcl.launch"/>
+  <include file="$(find masterbot_physical)/launch/amcl.launch"/>
 
   <!-- move_base -->
-  <include file="$(find masterbot_navigation)/launch/move_base.launch">    
+  <include file="$(find masterbot_physical)/launch/move_base.launch">    
     <arg name="move_forward_only" value="$(arg move_forward_only)"/>
-  </include>
+</include>
 
   <!-- rviz -->
   <node 

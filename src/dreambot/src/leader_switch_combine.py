@@ -127,9 +127,10 @@ class CombinedPathStatusSubscriber:
 
         distances = np.linalg.norm(self.path - current_position, axis=1)
         closest_index = np.argmin(distances)
-
+        # rospy.loginfo("Closest index: %d, length path: %d", closest_index, len(self.path)-20)
         # Check if the closest point is at the end of the path
-        if closest_index >= len(self.path) - 1:
+
+        if closest_index >= len(self.path) - 20:
             rospy.loginfo("Master has reached the end of the path.")
             self.reached_final_waypoint = True
             self.goal_master = self.path[-1]
@@ -163,12 +164,13 @@ class CombinedPathStatusSubscriber:
 
     def stop_with_delay(self):
         """Delay publishing zero velocities to allow for a brief pause after reaching the goal."""
-        rospy.sleep(3) 
+        rospy.sleep(1) 
         self.publish_zero_velocity()
         self.stop_publishing = True  
 
-    def update_goal_slave(self):
+    def update_goal_slave(self, distance_x, distance_y):
         # Stop all publishing activities if goal is reached
+        current_position = np.array([distance_x, distance_y])
         if self.stop_publishing:
             return
 
@@ -189,13 +191,18 @@ class CombinedPathStatusSubscriber:
                     self.goal_slave = [x, y]
                     self.distance_flag_slave = True
                     self.publish_goal_marker(self.goal_slave, self.slave_goal_marker_pub, "slave_goal_marker", 1, (0.0, 0.0, 1.0))
-                    
+
+                    distances = np.linalg.norm(self.path - current_position, axis=1)
+                    closest_index = np.argmin(distances)
+                    rospy.loginfo("Slave goal closest index: %d, path length: %d", closest_index, len(self.path) - 1000)
                     # Check if the slave goal is within a small tolerance from the last point in the path
-                    if np.linalg.norm(np.array(self.goal_slave) - np.array(self.path[-1])) < 0.05:
+                    if closest_index >= len(self.path) - 1000:
                         rospy.loginfo("Slave has reached the end of the path.")
                         self.reached_final_waypoint = True  # Mark master goal as reached
                         threading.Thread(target=self.stop_with_delay).start()  # Start a thread to handle delay and stopping
                     break
+                
+
         else:
             # Look backward in the path for the slave goal (existing behavior)
             for i in range(master_index - 1, -1, -1):
@@ -225,7 +232,7 @@ class CombinedPathStatusSubscriber:
         linear_x_in = msg.twist.twist.linear.x
         linear_y_in = msg.twist.twist.linear.y
 
-        self.update_goal_slave()
+        self.update_goal_slave(distance_x,distance_y)
 
         error_x_slave = self.goal_slave[0] - distance_x
         error_y_slave = self.goal_slave[1] - distance_y

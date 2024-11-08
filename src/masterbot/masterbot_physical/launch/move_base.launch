@@ -10,12 +10,12 @@
   
   <node pkg="move_base" type="move_base" respawn="false" name="master_move_base" output="screen">
     <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
-    <rosparam file="$(find masterbot_navigation)/param/common_costmap.yaml" command="load" ns="global_costmap" />
-    <rosparam file="$(find masterbot_navigation)/param/common_costmap.yaml" command="load" ns="local_costmap" />
-    <rosparam file="$(find masterbot_navigation)/param/local_costmap.yaml" command="load" />
-    <rosparam file="$(find masterbot_navigation)/param/global_costmap.yaml" command="load" />
-    <rosparam file="$(find masterbot_navigation)/param/move_base.yaml" command="load" />
-    <rosparam file="$(find masterbot_navigation)/param/dwa_planner.yaml" command="load" />
+    <rosparam file="$(find masterbot_physical)/param/common_costmap.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find masterbot_physical)/param/common_costmap.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find masterbot_physical)/param/local_costmap.yaml" command="load" />
+    <rosparam file="$(find masterbot_physical)/param/global_costmap.yaml" command="load" />
+    <rosparam file="$(find masterbot_physical)/param/move_base.yaml" command="load" />
+    <rosparam file="$(find masterbot_physical)/param/dwa_planner.yaml" command="load" />
     <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
     <remap from="odom" to="$(arg odom_topic)"/>
     <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />

@@ -1,0 +1,26 @@
+
+global_costmap:
+  global_frame: map
+  robot_base_frame: slave_base_footprint_ekf
+
+  update_frequency: 10.0
+  publish_frequency: 10.0
+  transform_tolerance: 0.5
+
+  static_map: true
+
+  obstacle_layer:
+    observation_sources: lidar_scan
+    lidar_scan:
+      topic: /filtered_scan_slave
+      sensor_frame: slave_lidar    # Update this to your LIDAR frame
+      data_type: LaserScan
+      marking: true
+      clearing: true
+      obstacle_range: 3.0
+      raytrace_range: 3.5
+
+  inflation_layer:
+    inflation_radius: 2.0
+    cost_scaling_factor: 3.0
+      

@@ -1,0 +1,8 @@
+
+<launch>
+
+     <node pkg="dreambot_data" type="master_path.py" name="master_filter_data_collector" output="screen"/>
+     <node pkg="dreambot_data" type="distance.py" name="payload_data_collector" output="screen"/>
+     <node pkg="dreambot_data" type="slave_path.py" name="slave_filter_data_collector" output="screen"/>
+
+</launch>

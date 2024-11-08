@@ -22,5 +22,6 @@ include_directories(
 
 catkin_install_python(PROGRAMS
   src/goal_pose.py
+  src/master_lidar_filter.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
