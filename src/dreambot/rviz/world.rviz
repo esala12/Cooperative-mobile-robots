@@ -86,12 +86,12 @@ Visualization Manager:
         map:
           master_odom:
             master_base_footprint_ekf:
+              IMU_sensor:
+                {}
               master_lidar:
                 {}
           slave_odom:
             slave_base_footprint_ekf:
-              IMU_sensor:
-                {}
               slave_lidar:
                 {}
       Update Interval: 0
@@ -237,7 +237,7 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.05000000074505806
       Style: Flat Squares
-      Topic: /lidar_master/scan
+      Topic: /filtered_scan_master
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
@@ -265,7 +265,7 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.05000000074505806
       Style: Flat Squares
-      Topic: /lidar_slave/scan
+      Topic: /filtered_scan_slave
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
@@ -424,7 +424,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 12.783053398132324
+      Distance: 9.348929405212402
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -432,9 +432,9 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 3.1383180618286133
-        Y: -1.2852028608322144
-        Z: -1.744084119796753
+        X: -2.02506947517395
+        Y: 1.0294382572174072
+        Z: -1.7417829036712646
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
@@ -442,7 +442,7 @@ Visualization Manager:
       Near Clip Distance: 0.009999999776482582
       Pitch: 1.5697963237762451
       Target Frame: <Fixed Frame>
-      Yaw: 4.708581924438477
+      Yaw: 4.698581695556641
     Saved: ~
 Window Geometry:
   Displays:

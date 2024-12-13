@@ -31,11 +31,11 @@
 
     <!-- Run a python script to send a service call to gazebo_ros to spawn the URDF robots -->
     <node name="urdf_spawner_masterbot" pkg="gazebo_ros" type="spawn_model" args="-urdf -model masterbot -param robot_description1
-        -x -2.0 -y 5.5 -z 1  
+        -x -9.0 -y 5.5 -z 1  
         -Y 0 -P 0 -R 0"/>
 
     <node name="urdf_spawner_zm_robot" pkg="gazebo_ros" type="spawn_model" args="-urdf -model zm_robot -param robot_description2
-        -x -9 -y 1 -z 1  
+        -x -9 -y 4 -z 1  
         -Y 0 -P 0 -R 0"/> <!-- Adjust the position and orientation of the zm_robot as needed -->
 
     <!-- send fake joint values -->

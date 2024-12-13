@@ -21,8 +21,6 @@ class CustomTkinterApp:
         # Create the main application window
         self.root = customtkinter.CTk()
         self.root.title('Tkinter.com - Custom Tkinter!')
-        # Removed the fullscreen attribute
-        # self.root.attributes('-fullscreen', True)
 
         # Adjust frame layout to fill the screen
         self.top_frame = customtkinter.CTkFrame(self.root)
@@ -83,25 +81,19 @@ class CustomTkinterApp:
         # Create buttons A to F, filling the space
         button_names = ["A", "B", "C", "D", "E", "F"]
         for i, name in enumerate(button_names):
+            button = customtkinter.CTkButton(
+                self.buttons_frame, 
+                text=name, 
+                height=80, 
+                width=120, 
+                font=('Helvetica', 20)
+            )
             if name == "A":
-                # Bind press and release for button A and disable it permanently
-                button = customtkinter.CTkButton(
-                    self.buttons_frame, 
-                    text=name, 
-                    height=80, 
-                    width=120, 
-                    font=('Helvetica', 20),
-                    state='disabled'  # Disable Button A permanently
-                )
+                # Bind press and release for button A
+                button.bind('<ButtonPress-1>', self.button_a_pressed)
+                button.bind('<ButtonRelease-1>', self.button_a_released)
             else:
                 # Bind press and release for buttons B-F
-                button = customtkinter.CTkButton(
-                    self.buttons_frame, 
-                    text=name, 
-                    height=80, 
-                    width=120, 
-                    font=('Helvetica', 20)
-                )
                 button.bind('<ButtonPress-1>', lambda event, n=name: self.multi_path_pressed(event, n))
                 button.bind('<ButtonRelease-1>', lambda event, n=name: self.multi_path_released(event, n))
             button.grid(row=i//3, column=i%3, padx=20, pady=20, sticky='nsew')
@@ -161,15 +153,26 @@ class CustomTkinterApp:
         print(f"/multi_path set to False {button_name} after 3 seconds")
 
     def button_a_pressed(self, event):
-        msg = BoolInt()
-        msg.flag = True
-        msg.number = 0
-        self.base_station_pub.publish(msg)
-        print("Button A pressed: activate_base_station set to True")
-        threading.Timer(3.0, self.set_activate_base_station_false).start()
+        # # Publish to /activate_base_station
+        # msg_base_station = BoolInt()
+        # msg_base_station.flag = True
+        # msg_base_station.number = 0
+        # self.base_station_pub.publish(msg_base_station)
+        # print("Button A pressed: activate_base_station set to True")
+
+        # Publish to /multi_path
+        msg_multi_path = BoolString()
+        msg_multi_path.flag = True
+        msg_multi_path.data = "A"
+        self.multi_path_pub.publish(msg_multi_path)
+        print("Button A pressed: /multi_path set to True A")
+
+        # # Schedule to set activate_base_station False
+        # threading.Timer(3.0, self.set_activate_base_station_false).start()
 
     def button_a_released(self, event):
-        print("Button A released: activate_base_station will turn False after 3 seconds")
+        print("Button A released: activate_base_station and /multi_path will turn False after 3 seconds")
+        threading.Timer(3.0, self.publish_multi_path_false, args=("A",)).start()
 
     def set_activate_base_station_false(self):
         msg = BoolInt()

@@ -4,7 +4,7 @@ import actionlib
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from actionlib_msgs.msg import GoalStatus
 from geometry_msgs.msg import Point
-from dreambot_tkinter.msg import BoolInt
+from dreambot_tkinter.msg import BoolInt, BoolString
 from std_msgs.msg import Bool
 import math
 
@@ -12,6 +12,9 @@ class MoveBaseClient:
     def __init__(self):
         self.ac = actionlib.SimpleActionClient("slave_move_base", MoveBaseAction)
         rospy.init_node('slavebot_navigation', anonymous=False)
+
+        # Subscribe to the /multi_path topic with BoolString message type
+        self.multi_path_sub = rospy.Subscriber('/multi_path', BoolString, self.multi_path_callback, queue_size=10)
 
         # Subscribe to the activate_base_station topic with BoolInt message type
         self.activate_sub = rospy.Subscriber('/activate_base_station', BoolInt, self.activate_callback, queue_size=20)
@@ -32,8 +35,16 @@ class MoveBaseClient:
         rospy.loginfo("Waiting for the move_base action server to come up")
         self.ac.wait_for_server()
 
+    def multi_path_callback(self, msg):
+        # Callback to handle messages from /multi_path
+        if msg.flag and msg.data == "A":
+            rospy.loginfo("Button A pressed: Moving to specific location (x=-9.0, y=5.5)")
+            self.move_to_goal([-0.9105815291404724, -1.1954269409179688, 0.0, 1.0])  # Move to the specified location
+        else:
+            rospy.loginfo(f"Received /multi_path message: flag={msg.flag}, data={msg.data}")
+
     def activate_callback(self, msg):
-        self.distance = msg.number
+        self.distance = msg.number - 0.5
         half_dist = math.sqrt((self.distance ** 2) / 2)
         self.slave_pos = self.initial_coordinate[1] - half_dist
         # Callback to handle the activate_base_station messages

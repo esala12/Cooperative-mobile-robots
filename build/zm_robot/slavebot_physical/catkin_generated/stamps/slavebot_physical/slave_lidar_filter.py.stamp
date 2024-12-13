@@ -8,7 +8,7 @@ class LaserScanFilter:
         
         # Subscribe to the /scan topic
         self.scan_subscriber = rospy.Subscriber(
-            'scan',
+            '/lidar_slave/scan',
             LaserScan,
             self.scan_callback
         )
@@ -25,7 +25,7 @@ class LaserScanFilter:
             (np.deg2rad(38), np.deg2rad(48)),      
             (np.deg2rad(129), np.deg2rad(141)),
             (np.deg2rad(-141), np.deg2rad(-131)),
-            (np.deg2rad(-48), np.deg2rad(-39))
+            (np.deg2rad(-50), np.deg2rad(-37))
             # (np.deg2rad(-55), np.deg2rad(-35)),   
             # (np.deg2rad(35), np.deg2rad(55)),
             # (np.deg2rad(130), np.deg2rad(140)),
@@ -63,7 +63,7 @@ class LaserScanFilter:
 
         # Publish the filtered scan data
         self.filtered_scan_publisher.publish(filtered_scan)
-        rospy.loginfo("Published filtered scan data")
+        
 
 def main():
     laser_scan_filter = LaserScanFilter()

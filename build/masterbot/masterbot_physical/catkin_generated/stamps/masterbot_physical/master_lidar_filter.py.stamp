@@ -8,7 +8,7 @@ class LaserScanFilter:
         
         # Subscribe to the /scan topic
         self.scan_subscriber = rospy.Subscriber(
-            '/scan',
+            '/lidar_master/scan',
             LaserScan,
             self.scan_callback
         )
@@ -23,9 +23,9 @@ class LaserScanFilter:
         # Define the angle ranges to filter out (in radians) for each of the four corners
         self.filter_ranges = [
             (np.deg2rad(38), np.deg2rad(48)),      
-            (np.deg2rad(129), np.deg2rad(141)),
+            (np.deg2rad(127), np.deg2rad(143)),
             (np.deg2rad(-141), np.deg2rad(-131)),
-            (np.deg2rad(-48), np.deg2rad(-39))
+            (np.deg2rad(-50), np.deg2rad(-37))
             # (np.deg2rad(-55), np.deg2rad(-35)),      
             # (np.deg2rad(35), np.deg2rad(55)),
             # (np.deg2rad(130), np.deg2rad(140)),

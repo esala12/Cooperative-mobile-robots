@@ -20,8 +20,8 @@ class MoveBaseClient:
         self.docking_pub = rospy.Publisher('/master_docking_station', Bool, queue_size=10)
 
         # self.initial_coordinate = [-0.35, 0.3]
-        # self.initial_coordinate = [-8.8, 5.5]
-        self.initial_coordinate = [-0.3, 0.3]
+        self.initial_coordinate = [-8.8, 5.5]
+        # self.initial_coordinate = [-0.3, 0.3]
 
         # Internal state to track if the robot should move
         self.active = False

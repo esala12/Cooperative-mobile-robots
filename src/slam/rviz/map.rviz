@@ -62,6 +62,8 @@ Visualization Manager:
           Value: true
         map:
           Value: true
+        master_base_footprint:
+          Value: true
         master_base_footprint_ekf:
           Value: true
         master_lidar:
@@ -77,6 +79,8 @@ Visualization Manager:
       Tree:
         map:
           master_odom:
+            master_base_footprint:
+              {}
             master_base_footprint_ekf:
               IMU_sensor:
                 {}
@@ -117,7 +121,7 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.03999999910593033
       Style: Flat Squares
-      Topic: /lidar_master/scan
+      Topic: /master_scan
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
@@ -150,7 +154,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 15.285284042358398
+      Distance: 20.56031036376953
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -158,9 +162,9 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 4.143370628356934
-        Y: -1.957992672920227
-        Z: -0.7703344821929932
+        X: 2.0042481422424316
+        Y: -1.0924159288406372
+        Z: -0.769483745098114
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false

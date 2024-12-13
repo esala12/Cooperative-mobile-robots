@@ -175,3 +175,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/dreambot" TYPE PROGRAM FILES "/home/esala/dreambot_ws/build/dreambot/catkin_generated/installspace/multi_path_six1.py")
 endif()
 
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/dreambot" TYPE PROGRAM FILES "/home/esala/dreambot_ws/build/dreambot/catkin_generated/installspace/safety.py")
+endif()
+

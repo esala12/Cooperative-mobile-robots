@@ -2,7 +2,7 @@
 
 import rospy
 from dreambot.msg import CombinedPathStatus
-from std_msgs.msg import Float64
+from std_msgs.msg import Float64, Bool
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Twist
 from visualization_msgs.msg import Marker
@@ -19,10 +19,12 @@ class CombinedPathStatusSubscriber:
         self.forward_slave_goal = None
         self.path = None
         self.count_master = 0
+        self.safety_active = False  # New safety flag
 
         # Subscribers for status and activation
         self.status_sub = rospy.Subscriber('/combined_path_status', CombinedPathStatus, self.status_callback)
         self.activate_sub = rospy.Subscriber('/activate_base_station', BoolInt, self.activate_callback, queue_size=20)
+        self.safety_sub = rospy.Subscriber('/safety', Bool, self.safety_callback)  # Safety subscriber
 
         # Node states and goals
         self.node_active = False
@@ -58,8 +60,27 @@ class CombinedPathStatusSubscriber:
         self.slave_vel_pub = rospy.Publisher('slave_cmd_vel', Twist, queue_size=10)
         self.slave_goal_marker_pub = rospy.Publisher('slave_goal_marker', Marker, queue_size=10)
 
+    def safety_callback(self, msg):
+        """Callback for safety topic to handle obstacle detection."""
+        if msg.data:  # If safety is active
+            rospy.logwarn("Safety condition triggered! Stopping robots.")
+            self.safety_active = True
+            self.publish_zero_velocity()  # Stop both robots
+        else:
+            rospy.loginfo("Safety condition cleared. Resuming normal operation.")
+            self.safety_active = False  # Resume normal operation
+
+    def check_safety(self):
+        """Check the safety condition before proceeding with any operation."""
+        if self.safety_active:
+            rospy.logwarn("Safety condition is active. Halting operations.")
+            return True
+        return False
+
     def status_callback(self, msg):
-        # Update forward_slave_goal and path from CombinedPathStatus message
+        """Update forward_slave_goal and path from CombinedPathStatus message."""
+        if self.check_safety():
+            return
         self.node_active = msg.node_active
         self.forward_slave_goal = msg.path_published
         self.path = self.format_combined_path(msg.path.x, msg.path.y)
@@ -84,9 +105,14 @@ class CombinedPathStatusSubscriber:
 
     def activate_callback(self, msg):
         # Set distance_master from the activation message
+        if self.check_safety():
+            return
         self.distance_master = msg.number
 
     def odom_master_callback(self, msg):
+
+        if self.check_safety():
+            return
         # Stop all publishing activities if goal is reached
         if self.stop_publishing:
             return
@@ -127,10 +153,10 @@ class CombinedPathStatusSubscriber:
 
         distances = np.linalg.norm(self.path - current_position, axis=1)
         closest_index = np.argmin(distances)
-        # rospy.loginfo("Closest index: %d, length path: %d", closest_index, len(self.path)-20)
+        # rospy.loginfo("Closest index: %d, length path: %d", closest_index, len(self.path)-100)
         # Check if the closest point is at the end of the path
 
-        if closest_index >= len(self.path) - 20:
+        if closest_index >= len(self.path) - 100:
             rospy.loginfo("Master has reached the end of the path.")
             self.reached_final_waypoint = True
             self.goal_master = self.path[-1]
@@ -154,7 +180,7 @@ class CombinedPathStatusSubscriber:
             self.distance_flag = False
 
     def publish_zero_velocity(self):
-        """Publish zero velocities to both master and slave and stop further publishing."""
+        """Publish zero velocities to both master and slave."""
         zero_twist = Twist()
         zero_twist.linear.x = 0.0
         zero_twist.linear.y = 0.0
@@ -169,6 +195,7 @@ class CombinedPathStatusSubscriber:
         self.stop_publishing = True  
 
     def update_goal_slave(self, distance_x, distance_y):
+        
         # Stop all publishing activities if goal is reached
         current_position = np.array([distance_x, distance_y])
         if self.stop_publishing:
@@ -194,9 +221,9 @@ class CombinedPathStatusSubscriber:
 
                     distances = np.linalg.norm(self.path - current_position, axis=1)
                     closest_index = np.argmin(distances)
-                    rospy.loginfo("Slave goal closest index: %d, path length: %d", closest_index, len(self.path) - 1000)
+                    rospy.loginfo("Slave goal closest index: %d, path length: %d", closest_index, len(self.path) - 5000)
                     # Check if the slave goal is within a small tolerance from the last point in the path
-                    if closest_index >= len(self.path) - 1000:
+                    if closest_index >= len(self.path) - 5000:
                         rospy.loginfo("Slave has reached the end of the path.")
                         self.reached_final_waypoint = True  # Mark master goal as reached
                         threading.Thread(target=self.stop_with_delay).start()  # Start a thread to handle delay and stopping
@@ -219,6 +246,8 @@ class CombinedPathStatusSubscriber:
             self.distance_flag_slave = False
 
     def odom_slave_callback(self, msg):
+        if self.check_safety():
+            return
         # Stop all publishing activities if goal is reached
         if self.stop_publishing:
             return
@@ -243,24 +272,32 @@ class CombinedPathStatusSubscriber:
         self.slave_input_linear_y_vel_pub.publish(Float64(linear_y_in))
 
     def vel_x_master_callback(self, msg):
+        if self.check_safety():
+            return
         if not self.node_active or self.stop_publishing:
             return
         self.master_linear_x_out = msg.data
         self.publish_velocity_master()
 
     def vel_y_master_callback(self, msg):
+        if self.check_safety():
+            return
         if not self.node_active or self.stop_publishing:
             return
         self.master_linear_y_out = msg.data
         self.publish_velocity_master()
 
     def vel_x_slave_callback(self, msg):
+        if self.check_safety():
+            return
         if not self.node_active or self.stop_publishing:
             return
         self.slave_linear_x_out = msg.data
         self.publish_velocity_slave()
 
     def vel_y_slave_callback(self, msg):
+        if self.check_safety():
+            return
         if not self.node_active or self.stop_publishing:
             return
         self.slave_linear_y_out = msg.data

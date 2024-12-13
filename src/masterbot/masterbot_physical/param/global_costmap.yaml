@@ -12,7 +12,7 @@ global_costmap:
   obstacle_layer:
     observation_sources: lidar_scan
     lidar_scan:
-      topic: /lidar_master/scan
+      topic: /filtered_scan_master
       sensor_frame: master_lidar    # Update this to your LIDAR frame
       data_type: LaserScan
       marking: true

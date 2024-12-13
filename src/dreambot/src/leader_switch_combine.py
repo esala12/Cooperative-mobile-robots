@@ -2,8 +2,8 @@
 
 import rospy
 from dreambot.msg import CombinedPathStatus
-from std_msgs.msg import Float64
-from nav_msgs.msg import Odometry
+from std_msgs.msg import Float64, Bool
+from nav_msgs.msg import Odometry, Path
 from geometry_msgs.msg import Twist
 from visualization_msgs.msg import Marker
 from dreambot_tkinter.msg import BoolInt
@@ -19,10 +19,12 @@ class CombinedPathStatusSubscriber:
         self.forward_slave_goal = None
         self.path = None
         self.count_master = 0
+        self.safety_active = False  # New safety flag
 
         # Subscribers for status and activation
         self.status_sub = rospy.Subscriber('/combined_path_status', CombinedPathStatus, self.status_callback)
         self.activate_sub = rospy.Subscriber('/activate_base_station', BoolInt, self.activate_callback, queue_size=20)
+        self.safety_sub = rospy.Subscriber('/safety', Bool, self.safety_callback)  # Safety subscriber
 
         # Node states and goals
         self.node_active = False
@@ -58,8 +60,29 @@ class CombinedPathStatusSubscriber:
         self.slave_vel_pub = rospy.Publisher('slave_cmd_vel', Twist, queue_size=10)
         self.slave_goal_marker_pub = rospy.Publisher('slave_goal_marker', Marker, queue_size=10)
 
+        self.path_pub = rospy.Publisher('/path', Path, queue_size=10)
+
+    def safety_callback(self, msg):
+        """Callback for safety topic to handle obstacle detection."""
+        if msg.data:  # If safety is active
+            rospy.logwarn("Safety condition triggered! Stopping robots.")
+            self.safety_active = True
+            self.publish_zero_velocity()  # Stop both robots
+        else:
+            rospy.loginfo("Safety condition cleared. Resuming normal operation.")
+            self.safety_active = False  # Resume normal operation
+
+    def check_safety(self):
+        """Check the safety condition before proceeding with any operation."""
+        if self.safety_active:
+            rospy.logwarn("Safety condition is active. Halting operations.")
+            return True
+        return False
+
     def status_callback(self, msg):
-        # Update forward_slave_goal and path from CombinedPathStatus message
+        """Update forward_slave_goal and path from CombinedPathStatus message."""
+        if self.check_safety():
+            return
         self.node_active = msg.node_active
         self.forward_slave_goal = msg.path_published
         self.path = self.format_combined_path(msg.path.x, msg.path.y)
@@ -84,9 +107,14 @@ class CombinedPathStatusSubscriber:
 
     def activate_callback(self, msg):
         # Set distance_master from the activation message
-        self.distance_master = msg.number
+        if self.check_safety():
+            return
+        self.distance_master = msg.number-0.5
 
     def odom_master_callback(self, msg):
+
+        if self.check_safety():
+            return
         # Stop all publishing activities if goal is reached
         if self.stop_publishing:
             return
@@ -127,15 +155,26 @@ class CombinedPathStatusSubscriber:
 
         distances = np.linalg.norm(self.path - current_position, axis=1)
         closest_index = np.argmin(distances)
-        # rospy.loginfo("Closest index: %d, length path: %d", closest_index, len(self.path)-20)
+        # rospy.loginfo("Closest index: %d, length path: %d", closest_index, len(self.path)-100)
         # Check if the closest point is at the end of the path
 
-        if closest_index >= len(self.path) - 20:
+        end_pos_x, end_pos_y = self.path[-1]
+        end_master = math.sqrt((distance_x - end_pos_x) ** 2 + (distance_y - end_pos_y)**2)        
+        #rospy.loginfo("End Distance Master: %f", end_master)
+
+        if end_master <= 0.1:
             rospy.loginfo("Master has reached the end of the path.")
             self.reached_final_waypoint = True
             self.goal_master = self.path[-1]
             threading.Thread(target=self.stop_with_delay).start()  # Start a thread to handle delay and stopping
             return
+
+        # if closest_index >= len(self.path) - 100:
+        #     rospy.loginfo("Master has reached the end of the path.")
+        #     self.reached_final_waypoint = True
+        #     self.goal_master = self.path[-1]
+        #     threading.Thread(target=self.stop_with_delay).start()  # Start a thread to handle delay and stopping
+        #     return
 
         # Look for the next goal point that is 0.1 units ahead of the master
         for i in range(closest_index, len(self.path)):
@@ -154,7 +193,7 @@ class CombinedPathStatusSubscriber:
             self.distance_flag = False
 
     def publish_zero_velocity(self):
-        """Publish zero velocities to both master and slave and stop further publishing."""
+        """Publish zero velocities to both master and slave."""
         zero_twist = Twist()
         zero_twist.linear.x = 0.0
         zero_twist.linear.y = 0.0
@@ -165,10 +204,18 @@ class CombinedPathStatusSubscriber:
     def stop_with_delay(self):
         """Delay publishing zero velocities to allow for a brief pause after reaching the goal."""
         rospy.sleep(1) 
+
+        empty_path = Path()  # Create an empty Path message
+        empty_path.header.stamp = rospy.Time.now()  # Add a valid timestamp
+        empty_path.header.frame_id = "map"  # Use the appropriate frame ID
+        self.path_pub.publish(empty_path)
+        rospy.loginfo("Published an empty Path message to reset the path.")
+
         self.publish_zero_velocity()
         self.stop_publishing = True  
 
     def update_goal_slave(self, distance_x, distance_y):
+        
         # Stop all publishing activities if goal is reached
         current_position = np.array([distance_x, distance_y])
         if self.stop_publishing:
@@ -182,11 +229,21 @@ class CombinedPathStatusSubscriber:
             return
         master_index = master_index_array[0]
 
+        end_pos_x, end_pos_y = self.path[-1]
+        end_slave = math.sqrt((distance_x - end_pos_x) ** 2 + (distance_y - end_pos_y)**2)        
+        #rospy.loginfo("End Distance Slave: %f", end_slave)
+        if end_slave <= 0.1:
+            rospy.loginfo("Slave has reached the end of the path.")
+            self.reached_final_waypoint = True  # Mark master goal as reached
+            threading.Thread(target=self.stop_with_delay).start()  # Start a thread to handle delay and stopping
+            return
+
         if self.forward_slave_goal:
             # Look forward in the path for the slave goal
             for i in range(master_index + 1, len(self.path)):
                 x, y = self.path[i]
                 distance = math.sqrt((x - x_master) ** 2 + (y - y_master) ** 2)
+                
                 if abs(distance - self.distance_master) < 0.01:
                     self.goal_slave = [x, y]
                     self.distance_flag_slave = True
@@ -194,14 +251,14 @@ class CombinedPathStatusSubscriber:
 
                     distances = np.linalg.norm(self.path - current_position, axis=1)
                     closest_index = np.argmin(distances)
-                    rospy.loginfo("Slave goal closest index: %d, path length: %d", closest_index, len(self.path) - 1000)
+                    #rospy.loginfo("Slave goal closest index: %d, path length: %d", closest_index, len(self.path) - 10)
                     # Check if the slave goal is within a small tolerance from the last point in the path
-                    if closest_index >= len(self.path) - 1000:
+                    if closest_index >= len(self.path) - 10:
                         rospy.loginfo("Slave has reached the end of the path.")
                         self.reached_final_waypoint = True  # Mark master goal as reached
                         threading.Thread(target=self.stop_with_delay).start()  # Start a thread to handle delay and stopping
-                    break
-                
+                        break         
+                #rospy.loginfo("Inside: %d", distance)         
 
         else:
             # Look backward in the path for the slave goal (existing behavior)
@@ -219,6 +276,8 @@ class CombinedPathStatusSubscriber:
             self.distance_flag_slave = False
 
     def odom_slave_callback(self, msg):
+        if self.check_safety():
+            return
         # Stop all publishing activities if goal is reached
         if self.stop_publishing:
             return
@@ -243,24 +302,32 @@ class CombinedPathStatusSubscriber:
         self.slave_input_linear_y_vel_pub.publish(Float64(linear_y_in))
 
     def vel_x_master_callback(self, msg):
+        if self.check_safety():
+            return
         if not self.node_active or self.stop_publishing:
             return
         self.master_linear_x_out = msg.data
         self.publish_velocity_master()
 
     def vel_y_master_callback(self, msg):
+        if self.check_safety():
+            return
         if not self.node_active or self.stop_publishing:
             return
         self.master_linear_y_out = msg.data
         self.publish_velocity_master()
 
     def vel_x_slave_callback(self, msg):
+        if self.check_safety():
+            return
         if not self.node_active or self.stop_publishing:
             return
         self.slave_linear_x_out = msg.data
         self.publish_velocity_slave()
 
     def vel_y_slave_callback(self, msg):
+        if self.check_safety():
+            return
         if not self.node_active or self.stop_publishing:
             return
         self.slave_linear_y_out = msg.data

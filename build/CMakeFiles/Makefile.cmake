@@ -159,6 +159,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/esala/dreambot_ws/src/dreambot/src/path_service_client.py"
   "/home/esala/dreambot_ws/src/dreambot/src/path_service_server.py"
   "/home/esala/dreambot_ws/src/dreambot/src/reach_goal_client.py"
+  "/home/esala/dreambot_ws/src/dreambot/src/safety.py"
   "/home/esala/dreambot_ws/src/dreambot/src/velocity_to_odometry.py"
   "/home/esala/dreambot_ws/src/dreambot/src/wavepoint_generator.py"
   "/home/esala/dreambot_ws/src/dreambot_data/CMakeLists.txt"
